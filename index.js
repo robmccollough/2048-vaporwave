@@ -1,4 +1,5 @@
 import Game from "./engine/game.js";
+import background_map from "./background_map.js";
 
 const game = new Game(4, animate);
 game.onMove(renderBoard);
@@ -100,11 +101,15 @@ function renderBoard(gamestate) {
 	let tiles = gamestate.board
 		.map(
 			//inner tile
-			tile =>
-				$("<div/>", {
+			tile => {
+				console.log(background_map[tile]);
+				return $("<div/>", {
 					class: `tile-inner ${tile !== 0 ? "" : "tile-empty"}`,
 					html: tile
-				})
+				}).css({
+					background: background_map[tile]
+				});
+			}
 		)
 		.map(
 			//outer tile
