@@ -1,0 +1,223 @@
+$size: 4;
+$primaryText: rgb(85, 29, 107);
+$primaryColor: rgba(255, 255, 255, 0.6);
+$hintColor: rgba(0, 255, 0, 0.6);
+$tile-flip: 0.7s;
+$tile-shimmy: 0.2s;
+
+body {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+	background-image: url("./vaporwave-style-wallpaper-2560×1080.jpg");
+	background-size: cover;
+	height: 100vh;
+	z-index: 0;
+	overflow: hidden;
+}
+
+#root {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+}
+
+.board-container {
+	width: calc(((80vh / #{$size}) * #{$size}));
+	height: calc(((80vh / #{$size}) * #{$size}));
+	position: relative;
+	// grid-template-columns: repeat(#{$size}, calc(80vh / #{$size}));
+	// gap: 10px 10px;
+	margin: 10px;
+	/* background-image: linear-gradient(to top, #37ecba 0%, #72afd3 100%); */
+	min-width: 500px;
+	overflow: hidden;
+}
+.menu-container {
+	padding-top: 100px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: flex-start;
+	width: 30%;
+	height: 100%;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	font-size: 3em;
+	div {
+		display: flex;
+		flex-direction: row;
+		align-items: center;
+		justify-content: center;
+		img {
+			height: 200px;
+			width: auto;
+		}
+	}
+}
+
+.menu-score-label {
+	color: white;
+}
+
+.menu-score-value {
+	color: white;
+	font-size: 2em;
+}
+
+button {
+	background-color: rgba(255, 255, 255, 0.6);
+	width: 30%;
+	border-radius: 100px;
+	border: 0px;
+	height: 10%;
+	font-family: "retrofuturismregular";
+	font-size: 0.7em;
+	color: $primaryText;
+	&:hover {
+		background-color: rgba(200, 200, 200, 0.6);
+	}
+	margin: 10px;
+}
+
+.tile-outer {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: $primaryColor;
+	font-size: 3em;
+	border-radius: 20px;
+	width: calc(80vh / #{$size});
+	height: calc(80vh / #{$size});
+	transform: scale(0.9);
+	perspective: 400px;
+}
+
+.tile-inner {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+	background-image: linear-gradient(to right, #4facfe 0%, #00f2fe 100%);
+	border-radius: 20px;
+	width: 80%;
+	height: 80%;
+}
+
+.shimmy {
+	animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+@keyframes shake {
+	10%,
+	90% {
+		transform: translate3d(-1px, 0, 0);
+	}
+
+	20%,
+	80% {
+		transform: translate3d(2px, 0, 0);
+	}
+
+	30%,
+	50%,
+	70% {
+		transform: translate3d(-4px, 0, 0);
+	}
+
+	40%,
+	60% {
+		transform: translate3d(4px, 0, 0);
+	}
+}
+
+// .animating-left{
+//     transition: $tile-flip;
+//     transform: rotate3d(0,1,0, -360deg);
+// }
+
+// .animating-right{
+//     transition: $tile-flip;
+//     transform: rotate3d(0,1,0, 360deg);
+// }
+
+// .animating-up{
+//     transition: $tile-flip;
+//     transform: rotate3d(1,0,0, 360deg);
+
+// }
+
+// .animating-down{
+//     transition: $tile-flip;
+//     transform: rotate3d(1,0,0, -360deg);
+// }
+
+.tile-empty {
+	opacity: 0;
+	transition: none;
+}
+
+.floater {
+	width: 100px;
+	height: 100px;
+	position: absolute;
+	top: 10;
+	left: 10;
+	z-index: 5;
+	background-color: white;
+}
+
+.modal {
+	z-index: 3;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: calc(100% * -1);
+	text-align: center;
+	button {
+		width: 30%;
+		height: 10%;
+		border: 2px solid $primaryText;
+	}
+	animation: dropin 0.3s ease-in-out 0s 1 forwards;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(0, 0, 0, 0.2);
+}
+
+.modal-content {
+	font-family: "retrofuturismregular";
+	color: $primaryText;
+	width: 50%;
+	height: 50%;
+	display: flex;
+	flex-direction: column;
+	font-size: 1em;
+	align-items: center;
+	justify-content: center;
+	background-color: rgba(255, 255, 255, 0.8);
+	border: 10px solid rgb(85, 29, 107);
+	border-radius: 20px;
+	img {
+		height: 50%;
+		width: auto;
+		border-radius: 20px;
+	}
+}
+
+@keyframes dropin {
+	0% {
+		top: calc(100% * -1);
+	}
+	90% {
+		top: 20;
+	}
+	100% {
+		top: 0;
+	}
+}
